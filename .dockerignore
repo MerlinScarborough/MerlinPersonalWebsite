@@ -1,0 +1,43 @@
+# 版本控制
+.git
+.gitignore
+.github
+
+# IDE 配置
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 文档
+*.md
+README*
+LICENSE
+
+# Docker 相关
+docker-compose*.yml
+Dockerfile*
+.docker/
+
+# 临时文件
+*.log
+*.tmp
+.cache/
+.temp/
+
+# Python (如果本地开发用)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node.js (如果本地开发用)
+node_modules/
+package-lock.json
+yarn.lock

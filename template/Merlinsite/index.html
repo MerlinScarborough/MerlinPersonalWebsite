@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merlin 个人工作台</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'SmileySans';
+            src: url('../../src/SmileySans-Oblique-3.otf') format('opentype');
+            font-weight: normal;
+            font-style: oblique;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 上区域：Header Logo -->
+        <header class="header" id="header">
+            <h1 class="logo">Merlin</h1>
+        </header>
+
+        <!-- 左中区域：Viewport 幻灯片 -->
+        <section class="viewport" id="viewport">
+            <div class="slideshow-container">
+                <div class="slide active">
+                    <img src="" alt="Slide 1" class="slide-image">
+                </div>
+                <div class="slide">
+                    <img src="" alt="Slide 2" class="slide-image">
+                </div>
+                <div class="slide">
+                    <img src="" alt="Slide 3" class="slide-image">
+                </div>
+                <button class="nav-btn prev-btn" id="prevBtn">&#10094;</button>
+                <button class="nav-btn next-btn" id="nextBtn">&#10095;</button>
+            </div>
+            <div class="slide-indicators" id="slideIndicators"></div>
+        </section>
+
+        <!-- 左下区域：Broadcast 滚动广播 -->
+        <section class="broadcast" id="broadcast">
+            <div class="broadcast-header">
+                <span class="broadcast-icon">&#9654;</span>
+                <span class="broadcast-title">BROADCAST</span>
+            </div>
+            <div class="marquee-container">
+                <div class="marquee-content" id="marqueeContent"></div>
+            </div>
+        </section>
+
+        <!-- 右区域：Main Content 选项卡内容区 -->
+        <main class="main-content" id="mainContent">
+            <nav class="tabs-nav" id="tabsNav">
+                <button class="tab-btn active" data-tab="about">个人简介</button>
+                <button class="tab-btn" data-tab="skills">技能树</button>
+                <button class="tab-btn" data-tab="contact">联系方式</button>
+            </nav>
+
+            <div class="tab-content" id="tabContent">
+                <!-- 个人简介内容 -->
+                <div class="tab-pane active" id="about">
+                    <div class="content-section">
+                        <h2 class="section-title">关于我</h2>
+                        <p class="bio-text">
+                            你好，我是 Merlin，一名热爱技术的技术美术(Technical Artist)。
+                            我专注于实时渲染、着色器开发和视觉特效，致力于将艺术与技术完美融合。
+                        </p>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">定位</span>
+                                <span class="info-value">Technical Artist</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">领域</span>
+                                <span class="info-value">Real-time Rendering / VFX / Shaders</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">工具链</span>
+                                <span class="info-value">Unreal Engine 5 / Unity / Blender</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 技能树内容 -->
+                <div class="tab-pane" id="skills">
+                    <div class="content-section">
+                        <h2 class="section-title">技能树</h2>
+                        <div class="skills-container" id="skillsContainer"></div>
+                    </div>
+                </div>
+
+                <!-- 联系方式内容 -->
+                <div class="tab-pane" id="contact">
+                    <div class="content-section">
+                        <h2 class="section-title">联系方式</h2>
+                        <div class="contact-list" id="contactList"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="./js/main.js"></script>
+</body>
+</html>
