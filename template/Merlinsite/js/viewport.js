@@ -1,9 +1,19 @@
 import { slideData } from './data.js';
 
+function loadFromStorage(key, fallback) {
+    try {
+        const data = localStorage.getItem(key);
+        return data ? JSON.parse(data) : fallback;
+    } catch (e) {
+        return fallback;
+    }
+}
+
 let currentSlide = 0;
 let slideInterval = null;
 let slides = [];
 let indicators = [];
+let storedSlideData = [];
 
 export function initViewport() {
     const viewport = document.getElementById('viewport');
@@ -23,6 +33,7 @@ export function initViewport() {
         return;
     }
 
+    storedSlideData = loadFromStorage('merlin_slides', slideData);
     loadSlides();
     createIndicators(indicatorsContainer);
     showSlide(0);
@@ -45,11 +56,18 @@ export function initViewport() {
 function loadSlides() {
     const slideImages = document.querySelectorAll('.slide-image');
 
-    slideData.forEach((data, index) => {
+    storedSlideData.forEach((data, index) => {
         if (slideImages[index]) {
             slideImages[index].src = data.src;
-            slideImages[index].alt = data.alt;
-            slideImages[index].title = data.title;
+            slideImages[index].alt = data.alt || '';
+            slideImages[index].title = data.title || '';
+
+            if (data.link) {
+                slideImages[index].style.cursor = 'pointer';
+                slideImages[index].onclick = () => {
+                    window.open(data.link, '_blank');
+                };
+            }
         }
     });
 }
@@ -60,7 +78,7 @@ function createIndicators(container) {
     container.innerHTML = '';
     indicators = [];
 
-    slideData.forEach((_, index) => {
+    storedSlideData.forEach((_, index) => {
         const indicator = document.createElement('div');
         indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
         indicator.addEventListener('click', () => {

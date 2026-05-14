@@ -1,27 +1,29 @@
-# Merlin Personal Website - 跨平台 Docker Compose 配置
-# 支持自动检测操作系统并挂载正确的卷路径
+# ============================================
+# Linux 服务器专用 Docker Compose 配置
+# ============================================
+#
+# ⚠️ 此文件专门用于 Linux 服务器部署
+#    所有路径已硬编码，无需 .env 文件
 #
 # 使用方法：
-#   Windows: 复制 .env.windows 为 .env
-#   Linux:   复制 .env.linux 为 .env
+#   docker compose -f docker-compose.prod.yml up -d
 #
-# 启动命令：docker compose up -d
 
 services:
   web:
     image: nginx:1.25-alpine
     container_name: merlin-website
     restart: unless-stopped
-    
+
     ports:
       - "80:80"
-    
+
     volumes:
-      # 自动根据环境变量选择正确的路径 ✨
-      - ${PROJECT_PATH}:/usr/share/nginx/html:ro
-      # 挂载自定义 Nginx 配置
+      # Linux 服务器绝对路径（已硬编码）
+      - /root/apps/MerlinPersonalWebsite:/usr/share/nginx/html:ro
+      # Nginx 配置文件
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-    
+
     # 资源限制（适配 2G 内存服务器）
     deploy:
       resources:
@@ -31,7 +33,7 @@ services:
         reservations:
           memory: 64M
           cpus: '0.25'
-    
+
     # 健康检查
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost/ || exit 1"]
@@ -39,7 +41,7 @@ services:
       timeout: 10s
       retries: 3
       start_period: 10s
-    
+
     # 安全配置
     security_opt:
       - no-new-privileges:true
@@ -50,7 +52,7 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    
+
     networks:
       - merlin-network
 

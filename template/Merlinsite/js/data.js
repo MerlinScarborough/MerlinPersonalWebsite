@@ -39,41 +39,50 @@ export const broadcastMessages = [
 ];
 
 export const skillsData = [
-    { name: 'Unreal Engine 5', level: 90, category: '游戏引擎' },
-    { name: 'Unity', level: 75, category: '游戏引擎' },
-    { name: 'HLSL / GLSL', level: 85, category: '着色器编程' },
-    { name: 'Blender', level: 80, category: '3D 建模' },
-    { name: 'Substance Painter', level: 70, category: '材质贴图' },
-    { name: 'Python', level: 78, category: '脚本工具' },
-    { name: 'C++', level: 72, category: '程序开发' },
-    { name: 'Real-time Rendering', level: 88, category: '图形学' },
-    { name: 'VFX / Particles', level: 82, category: '视觉特效' },
-    { name: 'PBR Workflow', level: 85, category: '材质流程' }
+    { name: 'Dify', mastery: 400 },
+    { name: '英语', mastery: 550 },
+    { name: 'Unreal Engine', mastery: 350 },
+    { name: 'Blender', mastery: 300 },
+    { name: '云服务部署', mastery: 300 },
+    { name: '虚拟局域网组网', mastery: 300 },
+    { name: 'C++', mastery: 250 },
+    { name: 'Substance Designer', mastery: 150 },
+    { name: 'Substance Painter', mastery: 25 },
+    { name: '法语', mastery: 10 }
+];
+
+export const projectsData = [
+    {
+        rank: 1,
+        proj_name: '赛博朋克城市渲染',
+        proj_brief: '基于 Unreal Engine 5 的实时渲染项目，实现了动态全局光照和体积云效果，负责 Shader 开发和性能优化',
+        proj_link: '#'
+    },
+    {
+        rank: 2,
+        proj_name: 'PBR 材质系统',
+        proj_brief: '使用 Substance Designer 创建程序化材质工作流，支持多通道输出和实时预览',
+        proj_link: '#'
+    }
 ];
 
 export const contactData = [
     {
         icon: '📧',
         label: 'Email',
-        value: 'merlin@example.com',
-        link: 'mailto:merlin@example.com'
+        value: 'MerlinScarborough@hotmail.com',
+        link: 'mailto:MerlinScarborough@hotmail.com'
     },
     {
         icon: '💼',
         label: 'GitHub',
-        value: 'github.com/Merlin-TA',
-        link: 'https://github.com/Merlin-TA'
+        value: 'github.com/MerlinScarborough',
+        link: 'https://github.com/MerlinScarborough'
     },
     {
-        icon: '🎨',
-        label: 'ArtStation',
-        value: 'artstation.com/merlin',
-        link: 'https://www.artstation.com/merlin'
-    },
-    {
-        icon: '💬',
-        label: 'Discord',
-        value: 'Merlin#1234',
-        link: '#'
+        icon: '🎮',
+        label: 'Shadertoy',
+        value: 'shadertoy.com/user/MerlinScarborough',
+        link: 'https://www.shadertoy.com/user/MerlinScarborough'
     }
 ];

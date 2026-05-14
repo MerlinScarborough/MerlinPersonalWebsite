@@ -14,10 +14,10 @@
     --accent-cyan: #00FFFF;
     --accent-purple: #BC13FE;
 
-    /* 现代化字体系统 - 2026 */
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans SC', sans-serif;
-    --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
-    --font-artistic: 'SmileySans', 'Noto Sans SC', sans-serif;
+    /* 本地化字体系统 - 纯离线 */
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-mono: 'JetBrains Mono', Consolas, 'Courier New', monospace;
+    --font-artistic: 'SmileySans', sans-serif;
 }
 
 html, body {
@@ -38,7 +38,7 @@ html, body {
 .container {
     display: grid;
     grid-template-columns: 40% 60%;
-    grid-template-rows: 15% 50% 35%;
+    grid-template-rows: 5% 50% 45%;
     gap: 1px;
     height: 100vh;
     background-color: var(--border-color);
@@ -52,36 +52,60 @@ html, body {
     background-color: var(--bg-secondary);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;  /* 改为左对齐 */
+    padding-left: 40px;          /* 左侧留白 */
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid var(--border-color);
 }
 
 .logo {
-    font-family: var(--font-artistic);
-    font-size: 5rem;
-    font-weight: normal;
-    color: var(--accent-cyan);
-    text-shadow:
-        0 0 10px rgba(0, 255, 255, 0.5),
-        0 0 20px rgba(0, 255, 255, 0.3),
-        0 0 30px rgba(0, 255, 255, 0.2);
+    height: 40px;                /* Logo 高度 */
+    width: auto;                 /* 保持宽高比 */
+    cursor: default;             /* 禁止显示文本光标 */
+    user-select: none;           /* 禁止选中 */
     position: relative;
     z-index: 2;
+    filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.5));
+    animation: logoGlow 3s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.5))
+                drop-shadow(0 0 15px rgba(0, 255, 255, 0.3));
+    }
+    50% {
+        filter: drop-shadow(0 0 12px rgba(188, 19, 254, 0.6))
+                drop-shadow(0 0 20px rgba(188, 19, 254, 0.4));
+    }
+}
+
+.logo-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.logo-wrapper::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
     background: linear-gradient(
         90deg,
         transparent 0%,
-        rgba(0, 255, 255, 0.8) 25%,
-        rgba(188, 19, 254, 0.8) 50%,
-        rgba(0, 255, 255, 0.8) 75%,
+        var(--accent-cyan) 25%,
+        var(--accent-purple) 50%,
+        var(--accent-cyan) 75%,
         transparent 100%
     );
     background-size: 200% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    border-radius: 4px;
+    z-index: -1;
     animation: spectrumFlow 3s linear infinite;
+    opacity: 0.6;
 }
 
 @keyframes spectrumFlow {
@@ -93,15 +117,46 @@ html, body {
     }
 }
 
+/* 管理面板入口链接 */
+.panel-link {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 6px 16px;
+    margin-left: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+}
+
+.panel-link:hover {
+    color: var(--accent-cyan);
+    border-color: var(--accent-cyan);
+    background-color: rgba(0, 255, 255, 0.05);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.panel-link::before {
+    content: '⚙';
+    margin-right: 6px;
+}
+
 /* Logo 背景光效 */
 .header::before {
     content: '';
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 100px;              /* 光效位置也左移 */
     transform: translate(-50%, -50%);
-    width: 300px;
-    height: 150px;
+    width: 200px;               /* 缩小光效范围 */
+    height: 80px;               /* 缩小高度 */
     background: radial-gradient(
         ellipse,
         rgba(0, 255, 255, 0.15) 0%,
@@ -284,6 +339,8 @@ html, body {
     color: var(--accent-cyan);
     font-family: var(--font-mono);
     font-size: 13px;
+    cursor: default;              /* 禁止显示文本光标 */
+    user-select: none;            /* 禁止选中文字 */
     line-height: 1.8;
     animation: marqueeScroll 20s linear infinite;
     padding-left: 100%;
@@ -470,81 +527,174 @@ html, body {
     color: var(--accent-cyan);
 }
 
-/* ==================== 技能进度条样式 ==================== */
+/* ==================== 技能树样式（列表+颜色渐变）==================== */
 .skills-container {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 12px;
+    position: relative;
 }
 
 .skill-item {
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--border-color);
-    padding: 20px;
-    border-radius: 4px;
-}
-
-.skill-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    padding: 14px 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-left: 3px solid var(--skill-color, var(--border-color));
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.skill-item:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+    transform: translateX(8px);
+    box-shadow: -2px 0 10px rgba(var(--skill-color-rgb), 0.2);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .skill-name {
     font-family: var(--font-sans);
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
-    color: var(--text-primary);
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 8px currentColor;
 }
 
-.skill-level {
+.skill-mastery {
     font-family: var(--font-mono);
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 500;
-    color: var(--accent-cyan);
+    min-width: 45px;
+    text-align: right;
+    text-shadow: 0 0 6px currentColor;
 }
 
-.skill-bar {
-    height: 8px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
+.skills-disclaimer {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(128, 128, 128, 0.2);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    color: #606060;
+    text-align: right;
+    font-style: italic;
+    letter-spacing: 0.3px;
+}
+
+/* ==================== 作品集样式 ==================== */
+.album-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.project-card {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+    position: relative;
     overflow: hidden;
-    position: relative;
 }
 
-.skill-progress {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
-    border-radius: 4px;
-    transition: width 1s ease-in-out;
-    position: relative;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-}
-
-.skill-progress::after {
+.project-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.3),
-        transparent
-    );
-    animation: shimmer 2s infinite;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
 }
 
-@keyframes shimmer {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(100%);
-    }
+.project-card:hover {
+    border-color: var(--accent-cyan);
+    background-color: rgba(0, 255, 255, 0.03);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 255, 255, 0.15);
+}
+
+.project-card:hover::before {
+    transform: scaleX(1);
+}
+
+.project-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.project-rank {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent-purple);
+    min-width: 32px;
+}
+
+.project-name {
+    font-family: var(--font-sans);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: 0.3px;
+}
+
+.project-brief {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin: 0 0 18px 0;
+    text-align: justify;
+}
+
+.project-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent-cyan);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.project-link::after {
+    content: '→';
+    margin-left: 4px;
+    transition: margin-left 0.3s ease;
+}
+
+.project-link:hover {
+    color: var(--accent-purple);
+    text-shadow: 0 0 8px rgba(188, 19, 254, 0.5);
+}
+
+.project-link:hover::after {
+    margin-left: 10px;
 }
 
 /* ==================== 联系方式列表样式 ==================== */

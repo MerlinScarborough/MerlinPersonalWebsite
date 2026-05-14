@@ -3,17 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merlin 个人工作台</title>
+    <title>Merlin's                 |个人站 开发中</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* 本地化字体声明 */
+        
+        /* 得意黑 - 用于 Logo 和艺术标题 */
         @font-face {
             font-family: 'SmileySans';
             src: url('../../src/SmileySans-Oblique-3.otf') format('opentype');
             font-weight: normal;
             font-style: oblique;
+            font-display: swap;
+        }
+        
+        /* JetBrains Mono 可变字体 - 用于代码和技术内容 */
+        @font-face {
+            font-family: 'JetBrains Mono';
+            src: url('../../src/JetBrainsMono[wght].woff2') format('woff2-variations');
+            font-weight: 100 800;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        /* JetBrains Mono 斜体 */
+        @font-face {
+            font-family: 'JetBrains Mono';
+            src: url('../../src/JetBrainsMono-Italic[wght].woff2') format('woff2-variations');
+            font-weight: 100 800;
+            font-style: italic;
+            font-display: swap;
         }
     </style>
 </head>
@@ -21,7 +40,9 @@
     <div class="container">
         <!-- 上区域：Header Logo -->
         <header class="header" id="header">
-            <h1 class="logo">Merlin</h1>
+            <div class="logo-wrapper">
+                <img src="../../src/IMG/logo.png" alt="Merlin" class="logo">
+            </div>
         </header>
 
         <!-- 左中区域：Viewport 幻灯片 -->
@@ -58,6 +79,7 @@
             <nav class="tabs-nav" id="tabsNav">
                 <button class="tab-btn active" data-tab="about">个人简介</button>
                 <button class="tab-btn" data-tab="skills">技能树</button>
+                <button class="tab-btn" data-tab="album">作品集</button>
                 <button class="tab-btn" data-tab="contact">联系方式</button>
             </nav>
 
@@ -67,23 +89,18 @@
                     <div class="content-section">
                         <h2 class="section-title">关于我</h2>
                         <p class="bio-text">
-                            你好，我是 Merlin，一名热爱技术的技术美术(Technical Artist)。
-                            我专注于实时渲染、着色器开发和视觉特效，致力于将艺术与技术完美融合。
+                            一直在学习一些对自己人生有用，能给我在意的人带来幸福感的知识，并且在付出自己的劳动。虽然有很多瞎忙活，做了很多无用功，但是在岔路上也学到很多。目前在学习计算机的一些杂七杂八的知识，包括计算机网络，计算机图形学，并且对 游戏玩法设计/VFX/3D模型动画 有兴趣，希望能在大学的四年里一点点把我的知识图谱丰富起来，作为一个小小的百姓，希望能靠自己的能力找到匹配的工作，拿到美妙的工资，善事父母，租一个舒服的，离公司近的小房子，过舒舒服服的日子，条件允许再养条聪明的小狗。
                         </p>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <span class="info-label">定位</span>
-                                <span class="info-value">Technical Artist</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">领域</span>
-                                <span class="info-value">Real-time Rendering / VFX / Shaders</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="info-label">工具链</span>
-                                <span class="info-value">Unreal Engine 5 / Unity / Blender</span>
-                            </div>
-                        </div>
+
+                        <h2 class="section-title">关于创作</h2>
+                        <p class="bio-text">
+                            联想能力比较诡异，总能跳脱到某个远处。除了第九竿才能打着的联想能力，其他灵感基本靠做梦，梦到什么有意思的故事会写下来然后慢慢修改合理。灵感会在自己的Excalidraw里写下来，适合做交互式的就尝试着写游戏策划案，适合线性的可能会写成小说的形式，不过最终是希望做成动画或者游戏的所以不会很在意技法，除非是只能用在文章里的故事，会尝试写成精巧的小短篇。视觉上在努力养成自己的风格，不过还是从临摹别人的风格开始吧。不喜欢公式化的文字，不喜欢离开网络迷因就说不出话的嘴巴，但并不反对使用迷因。
+                        </p>
+
+                        <h2 class="section-title">关于风格偏好</h2>
+                        <p class="bio-text">
+                            不感兴趣日本二次元和衍生亚文化，不过挺喜欢《进击的巨人》这个作品；喜欢《罗小黑战记》；西幻喜欢《权力的游戏》《指环王/霍比特人》；游戏的美术风格喜欢《大神》《纪念碑谷》《MOTUS》《战地1》《奇异人生》系列，《艾尔登法环》本体，《行尸走肉》系列等。不过让我学着做出某个风格我是很乐意做的，就像收集成就一样。
+                        </p>
                     </div>
                 </div>
 
@@ -92,6 +109,14 @@
                     <div class="content-section">
                         <h2 class="section-title">技能树</h2>
                         <div class="skills-container" id="skillsContainer"></div>
+                    </div>
+                </div>
+
+                <!-- 作品集内容 -->
+                <div class="tab-pane" id="album">
+                    <div class="content-section">
+                        <h2 class="section-title">作品集</h2>
+                        <div class="album-container" id="albumContainer"></div>
                     </div>
                 </div>
 

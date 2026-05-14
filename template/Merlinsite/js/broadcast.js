@@ -1,5 +1,14 @@
 import { broadcastMessages } from './data.js';
 
+function loadFromStorage(key, fallback) {
+    try {
+        const data = localStorage.getItem(key);
+        return data ? JSON.parse(data) : fallback;
+    } catch (e) {
+        return fallback;
+    }
+}
+
 export function initBroadcast() {
     const marqueeContent = document.getElementById('marqueeContent');
 
@@ -8,7 +17,8 @@ export function initBroadcast() {
         return;
     }
 
-    const message = broadcastMessages.join('  ★  ');
+    const storedMessages = loadFromStorage('merlin_broadcast', broadcastMessages);
+    const message = storedMessages.join('  ★  ');
     marqueeContent.textContent = message;
 
     console.log('[Broadcast] 广播模块初始化完成');
